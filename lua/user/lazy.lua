@@ -100,4 +100,10 @@ require("lazy").setup({
 		end,
 	},
 	{ "SmiteshP/nvim-navic", dependencies = "neovim/nvim-lspconfig" },
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		config = function()
+			require("indent_blankline").setup()
+		end,
+	},
 })
