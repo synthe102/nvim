@@ -87,4 +87,17 @@ require("lazy").setup({
 			require("user.configs.dapui")
 		end,
 	},
+	{
+		"nvim-telescope/telescope.nvim",
+		version = "0.1.x",
+		dependencies = { "nvim-lua/plenary.nvim" },
+	},
+	{
+		"echasnovski/mini.bufremove",
+		version = "*",
+		config = function()
+			require("mini.bufremove").setup()
+		end,
+	},
+	{ "SmiteshP/nvim-navic", dependencies = "neovim/nvim-lspconfig" },
 })
