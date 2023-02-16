@@ -146,4 +146,5 @@ require("lazy").setup({
 			require("user.configs.alpha")
 		end,
 	},
+	{ "jay-babu/mason-nvim-dap.nvim" },
 })
