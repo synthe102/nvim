@@ -52,6 +52,16 @@ require("lazy").setup({
 			"nvim-tree/nvim-web-devicons",
 			"MunifTanjim/nui.nvim",
 		},
+		config = function()
+			require("user.configs.neo_tree")
+		end,
+	},
+	{
+		"s1n7ax/nvim-window-picker",
+		version = "v1.*",
+		config = function()
+			require("user.configs.nvim_window_picker")
+		end,
 	},
 	{
 		"folke/which-key.nvim",
@@ -106,4 +116,27 @@ require("lazy").setup({
 			require("indent_blankline").setup()
 		end,
 	},
+	{
+		"folke/noice.nvim",
+		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
+		config = function()
+			require("noice").setup()
+		end,
+	},
+	{ "mbbill/undotree" },
+	{
+		"akinsho/toggleterm.nvim",
+		version = "*",
+		config = function()
+			require("toggleterm").setup()
+		end,
+	},
+	{
+		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("user.configs.lualine")
+		end,
+	},
+	{ "numToStr/Comment.nvim", config = require("Comment").setup() },
 })

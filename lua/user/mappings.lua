@@ -30,16 +30,16 @@ wk.register({
 				"Toggle LSP hover",
 			},
 		},
-		h = {
-			name = "Harpoon",
-			m = { '<cmd>lua require("harpoon.mark").add_file()<CR>', "Mark file" },
-			n = { '<cmd>lua require("harpoon.ui").nav_next()<CR>', "Navigate to next file" },
-			N = { '<cmd>lua require("harpoon.ui").nav_prev()<CR>', "Navigate to previous file" },
-			["1"] = { '<cmd>lua require("harpoon.ui").nav_file(1)<CR>', "Navigate to file 1" },
-			["2"] = { '<cmd>lua require("harpoon.ui").nav_file(2)<CR>', "Navigate to file 2" },
-			["3"] = { '<cmd>lua require("harpoon.ui").nav_file(3)<CR>', "Navigate to file 3" },
-			["4"] = { '<cmd>lua require("harpoon.ui").nav_file(4)<CR>', "Navigate to file 4" },
-		},
+		-- h = {
+		-- 	name = "Harpoon",
+		-- 	m = { '<cmd>lua require("harpoon.mark").add_file()<CR>', "Mark file" },
+		-- 	n = { '<cmd>lua require("harpoon.ui").nav_next()<CR>', "Navigate to next file" },
+		-- 	N = { '<cmd>lua require("harpoon.ui").nav_prev()<CR>', "Navigate to previous file" },
+		-- 	["1"] = { '<cmd>lua require("harpoon.ui").nav_file(1)<CR>', "Navigate to file 1" },
+		-- 	["2"] = { '<cmd>lua require("harpoon.ui").nav_file(2)<CR>', "Navigate to file 2" },
+		-- 	["3"] = { '<cmd>lua require("harpoon.ui").nav_file(3)<CR>', "Navigate to file 3" },
+		-- 	["4"] = { '<cmd>lua require("harpoon.ui").nav_file(4)<CR>', "Navigate to file 4" },
+		-- },
 		c = {
 			function()
 				require("Comment.api").toggle.linewise.current()
