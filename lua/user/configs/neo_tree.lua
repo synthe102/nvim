@@ -6,6 +6,7 @@ end
 vim.g.neo_tree_remove_legacy_commands = true
 
 neo_tree.setup({
+	use_popups_for_input = false,
 	close_if_last_window = true,
 	enable_diagnostics = false,
 	source_selector = {
