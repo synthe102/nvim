@@ -73,7 +73,13 @@ require("lazy").setup({
 			require("nvim-autopairs").setup()
 		end,
 	},
-	{ "catppuccin/nvim", name = "catppuccin" },
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		config = function()
+			require("user.configs.catppuccin")
+		end,
+	},
 	{ "mrjones2014/smart-splits.nvim" },
 	{
 		"akinsho/bufferline.nvim",
@@ -116,13 +122,13 @@ require("lazy").setup({
 			require("indent_blankline").setup()
 		end,
 	},
-	{
-		"folke/noice.nvim",
-		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
-		config = function()
-			require("noice").setup()
-		end,
-	},
+	-- {
+	-- 	"folke/noice.nvim",
+	-- 	dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
+	-- 	config = function()
+	-- 		require("user.configs.noice")
+	-- 	end,
+	-- },
 	{ "mbbill/undotree" },
 	{
 		"akinsho/toggleterm.nvim",
