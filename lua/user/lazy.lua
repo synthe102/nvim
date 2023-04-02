@@ -1,7 +1,7 @@
 require("lazy").setup({
 	{
 		"VonHeikemen/lsp-zero.nvim",
-		branch = "v1.x",
+		branch = "v2.x",
 		dependencies = {
 			-- LSP Support
 			{ "neovim/nvim-lspconfig" }, -- Required
@@ -65,7 +65,9 @@ require("lazy").setup({
 	},
 	{
 		"folke/which-key.nvim",
-		config = require("user.configs.which_key"),
+		config = function()
+			require("user.configs.which_key")
+		end,
 	},
 	{
 		"windwp/nvim-autopairs",
@@ -144,7 +146,12 @@ require("lazy").setup({
 			require("user.configs.lualine")
 		end,
 	},
-	{ "numToStr/Comment.nvim", config = require("Comment").setup() },
+	{
+		"numToStr/Comment.nvim",
+		config = function()
+			require("Comment").setup()
+		end,
+	},
 	{
 		"goolord/alpha-nvim",
 		requires = { "nvim-tree/nvim-web-devicons" },
@@ -153,4 +160,7 @@ require("lazy").setup({
 		end,
 	},
 	{ "jay-babu/mason-nvim-dap.nvim" },
+	{ "rebelot/heirline.nvim" },
+	{ dir = "~/perso/aws_nvim" },
+	{ dir = "~/perso/foo" },
 })

@@ -1,7 +1,9 @@
 local lsp = require("lsp-zero").preset({
 	name = "recommended",
 	set_lsp_keymaps = true,
-	manage_nvim_cmp = true,
+	manage_nvim_cmp = {
+		set_sources = "recommended",
+	},
 	suggest_lsp_servers = true,
 })
 
@@ -14,7 +16,19 @@ lsp.on_attach(function(client, bufnr)
 	if client.server_capabilities.documentSymbolProvider then
 		require("nvim-navic").attach(client, bufnr)
 	end
+	lsp.default_keymaps({ buffer = bufnr })
+	lsp.buffer_autoformat()
 end)
+
+lsp.configure("tailwindcss", {
+	filetypes = { "rust" },
+	init_options = {
+		userLanguages = {
+			rust = "html",
+			svelte = "html",
+		},
+	},
+})
 
 lsp.setup()
 
@@ -27,6 +41,12 @@ vim.diagnostic.config({
 
 local cmp = require("cmp")
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+
+cmp.setup({
+	mapping = {
+		["<CR>"] = cmp.mapping.confirm(),
+	},
+})
 
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 

@@ -103,8 +103,8 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 		vim.diagnostic.setloclist({ open = false })
 	end,
 })
-vim.api.nvim_create_autocmd("BufWritePre", {
-	callback = function()
-		require("lsp-zero.server").format_cmd()
-	end,
-})
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+-- 	callback = function()
+-- 		require("lsp-zero.server").format_cmd()
+-- 	end,
+-- })
