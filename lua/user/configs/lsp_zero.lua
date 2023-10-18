@@ -13,40 +13,16 @@ lsp.nvim_workspace()
 require("nvim-navic").setup({ highlight = true })
 
 lsp.on_attach(function(client, bufnr)
-  if client.server_capabilities.documentSymbolProvider then require("nvim-navic").attach(client, bufnr) end
   lsp.default_keymaps({ buffer = bufnr })
+  if client.server_capabilities.documentSymbolProvider then require("nvim-navic").attach(client, bufnr) end
   lsp.buffer_autoformat()
 end)
 
--- lsp.configure("tailwindcss", {
---   filetypes = { "rust" },
---   init_options = {
---     userLanguages = {
---       rust = "html",
---       svelte = "html",
---     },
---   },
--- })
-
-lsp.configure("yamlls", {
-  settings = {
-    yaml = {
-      keyOrdering = false,
-    },
-  },
+require("lspconfig").gopls.setup({
+  on_init = function(client) client.capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true end,
 })
 
--- lsp.configure("gopls", {
---   settings = {
---     gopls = {
---       ["build.experimentalWorkspaceModule"] = true,
---     },
---   },
--- })
-
 lsp.setup()
-
-vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
 
 vim.diagnostic.config({
   virtual_text = true,
@@ -60,6 +36,8 @@ cmp.setup({
   sources = {
     { name = "nvim_lsp" },
     { name = "neorg" },
+    { name = "path" },
+    { name = "buffer" },
   },
   mapping = {
     ["<CR>"] = cmp.mapping.confirm(),
@@ -77,6 +55,7 @@ null_ls.setup({
 
 -- See mason-null-ls.nvim's documentation for more details:
 -- https://github.com/jay-babu/mason-null-ls.nvim#setup
+require("mason").setup()
 require("mason-null-ls").setup({
   handlers = {},
 })
@@ -85,6 +64,7 @@ require("mason-null-ls").setup({
 -- require("mason-null-ls").setup_handlers() -- Outdated ?
 
 require("mason-nvim-dap").setup({
-  automatic_setup = true,
+  ensure_installed = { "delve" },
+  handlers = {},
 })
 -- require("mason-nvim-dap").setup_handlers({})

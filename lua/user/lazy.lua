@@ -25,6 +25,9 @@ require("lazy").setup({
     config = function() require("user.configs.lsp_zero") end,
   },
   {
+    "towolf/vim-helm",
+  },
+  {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     event = "InsertEnter",
@@ -120,15 +123,17 @@ require("lazy").setup({
   { "SmiteshP/nvim-navic", dependencies = "neovim/nvim-lspconfig" },
   {
     "lukas-reineke/indent-blankline.nvim",
-    config = function() require("indent_blankline").setup() end,
+    main = "ibl",
+    opts = {
+      scope = {
+        show_end = false,
+        show_start = false,
+      },
+      indent = {
+        char = "▏",
+      },
+    },
   },
-  -- {
-  -- 	"folke/noice.nvim",
-  -- 	dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
-  -- 	config = function()
-  -- 		require("user.configs.noice")
-  -- 	end,
-  -- },
   { "mbbill/undotree" },
   {
     "akinsho/toggleterm.nvim",
@@ -150,7 +155,6 @@ require("lazy").setup({
     config = function() require("user.configs.alpha") end,
   },
   { "jay-babu/mason-nvim-dap.nvim" },
-  { "rebelot/heirline.nvim" },
   -- { dir = "~/perso/aws_nvim" },
   -- { dir = "~/perso/foo" },
   {
@@ -158,5 +162,32 @@ require("lazy").setup({
     build = ":Neorg sync-parsers",
     config = function() require("user.configs.neorg_conf") end,
     dependencies = { { "nvim-lua/plenary.nvim" }, { "nvim-neorg/neorg-telescope" } },
+  },
+  {
+    "nvim-neotest/neotest",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-neotest/neotest-go",
+    },
+    config = function()
+      -- get neotest namespace (api call creates or returns namespace)
+      local neotest_ns = vim.api.nvim_create_namespace("neotest")
+      vim.diagnostic.config({
+        virtual_text = {
+          format = function(diagnostic)
+            local message = diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
+            return message
+          end,
+        },
+      }, neotest_ns)
+      require("neotest").setup({
+        -- your neotest config here
+        adapters = {
+          require("neotest-go"),
+        },
+      })
+    end,
   },
 })
