@@ -4,20 +4,20 @@ require("lazy").setup({
     branch = "v2.x",
     dependencies = {
       -- LSP Support
-      { "neovim/nvim-lspconfig" }, -- Required
-      { "williamboman/mason.nvim" }, -- Optional
+      { "neovim/nvim-lspconfig" },             -- Required
+      { "williamboman/mason.nvim" },           -- Optional
       { "williamboman/mason-lspconfig.nvim" }, -- Optional
 
       -- Autocompletion
-      { "hrsh7th/nvim-cmp" }, -- Required
-      { "hrsh7th/cmp-nvim-lsp" }, -- Required
-      { "hrsh7th/cmp-buffer" }, -- Optional
-      { "hrsh7th/cmp-path" }, -- Optional
+      { "hrsh7th/nvim-cmp" },         -- Required
+      { "hrsh7th/cmp-nvim-lsp" },     -- Required
+      { "hrsh7th/cmp-buffer" },       -- Optional
+      { "hrsh7th/cmp-path" },         -- Optional
       { "saadparwaiz1/cmp_luasnip" }, -- Optional
-      { "hrsh7th/cmp-nvim-lua" }, -- Optional
+      { "hrsh7th/cmp-nvim-lua" },     -- Optional
 
       -- Snippets
-      { "L3MON4D3/LuaSnip" }, -- Required
+      { "L3MON4D3/LuaSnip" },             -- Required
       { "rafamadriz/friendly-snippets" }, -- Optional
       { "jose-elias-alvarez/null-ls.nvim" },
       { "jay-babu/mason-null-ls.nvim" },
@@ -34,15 +34,6 @@ require("lazy").setup({
     config = function() require("user.configs.copilot_conf") end,
   },
   {
-    "pwntester/octo.nvim",
-    requires = {
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
-      "nvim-tree/nvim-web-devicons",
-    },
-    config = function() require("octo").setup() end,
-  },
-  {
     "folke/trouble.nvim",
     requires = "nvim-tree/nvim-web-devicons",
     config = function() require("trouble").setup() end,
@@ -51,19 +42,6 @@ require("lazy").setup({
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = function() require("user.configs.ts") end,
-  },
-  {
-    "simrat39/rust-tools.nvim",
-    dependencies = {
-      { "neovim/nvim-lspconfig" },
-      { "nvim-lua/plenary.nvim" },
-      { "mfussenegger/nvim-dap" },
-    },
-    config = function() require("user.configs.rust_tools") end,
-  },
-  {
-    "iamcco/markdown-preview.nvim",
-    build = "cd app && npm install",
   },
   {
     "nvim-neo-tree/neo-tree.nvim",
