@@ -27,12 +27,12 @@ require("lazy").setup({
   {
     "towolf/vim-helm",
   },
-  {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-    config = function() require("user.configs.copilot_conf") end,
-  },
+  -- {
+  --   "zbirenbaum/copilot.lua",
+  --   cmd = "Copilot",
+  --   event = "InsertEnter",
+  --   config = function() require("user.configs.copilot_conf") end,
+  -- },
   {
     "folke/trouble.nvim",
     requires = "nvim-tree/nvim-web-devicons",
@@ -74,7 +74,6 @@ require("lazy").setup({
   { "mrjones2014/smart-splits.nvim" },
   {
     "akinsho/bufferline.nvim",
-    version = "v3.*",
     dependencies = "nvim-tree/nvim-web-devicons",
     config = function() require("user.configs.bufferline") end,
   },
