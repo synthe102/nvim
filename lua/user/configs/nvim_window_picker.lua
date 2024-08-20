@@ -4,9 +4,8 @@ if not ok then
 end
 
 window_picker.setup({
-	autoselect_one = true,
-	include_current = false,
 	filter_rules = {
+	  autoselect_one = true,
 		-- filter using buffer options
 		bo = {
 			-- if the file type is one of following, the window will be ignored

@@ -28,7 +28,7 @@ wk.register({
         function() vim.lsp.buf.hover() end,
         "Toggle LSP hover",
       },
-      t = { "<cmd>TroubleToggle<CR>", "Toggle Trouble.nvim" },
+      t = { "<cmd>Trouble diagnostics<CR>", "Toggle Trouble.nvim" },
     },
     -- h = {
     -- 	name = "Harpoon",

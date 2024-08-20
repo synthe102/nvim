@@ -1,36 +1,20 @@
-local lsp = require("lsp-zero").preset({
-  name = "recommended",
-  set_lsp_keymaps = true,
-  manage_nvim_cmp = {
-    set_sources = "recommended",
-  },
-  suggest_lsp_servers = true,
-})
+local lsp = require("lsp-zero")
 
--- (Optional) Configure lua language server for neovim
-lsp.nvim_workspace()
-
-require("nvim-navic").setup({ highlight = true })
-
-lsp.on_attach(function(client, bufnr)
-  lsp.default_keymaps({ buffer = bufnr })
-  if client.server_capabilities.documentSymbolProvider then require("nvim-navic").attach(client, bufnr) end
+local lsp_attach = function(client, bufnr)
+  if client.server_capabilities.documentSymbolProvider then
+    require('nvim-navic').attach(client, bufnr)
+  end
   lsp.buffer_autoformat()
-end)
+end
 
-require("lspconfig").gopls.setup({
-  on_init = function(client) client.capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true end,
-})
-
-lsp.setup()
-
-vim.diagnostic.config({
-  virtual_text = true,
-  update_in_insert = true,
+lsp.extend_lspconfig({
+  sign_text = true,
+  lsp_attach = lsp_attach,
 })
 
 local cmp = require("cmp")
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+local cmp_action = require("lsp-zero").cmp_action()
 
 cmp.setup({
   sources = {
@@ -41,30 +25,39 @@ cmp.setup({
   },
   mapping = {
     ["<CR>"] = cmp.mapping.confirm(),
+    ['<Tab>'] = cmp_action.tab_complete(),
+    ['<S-Tab>'] = cmp.mapping.select_prev_item({ behavior = 'select' }),
   },
+  formatting = lsp.cmp_format(),
+  snippet = {
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body)
+    end,
+  }
 })
 
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
-local null_ls = require("null-ls")
-local null_opts = lsp.build_options("null-ls", {})
 
-null_ls.setup({
-  on_attach = function(client, bufnr) null_opts.on_attach(client, bufnr) end,
-})
-
--- See mason-null-ls.nvim's documentation for more details:
--- https://github.com/jay-babu/mason-null-ls.nvim#setup
 require("mason").setup()
-require("mason-null-ls").setup({
-  handlers = {},
+require('mason-lspconfig').setup({
+  handlers = {
+    function(server_name)
+      require('lspconfig')[server_name].setup({})
+    end,
+    lua_ls = function()
+      require('lspconfig').lua_ls.setup({
+        on_init = function(client)
+          lsp.nvim_lua_settings(client, {})
+        end,
+      })
+    end,
+  }
 })
 
 -- Required when `automatic_setup` is true
--- require("mason-null-ls").setup_handlers() -- Outdated ?
 
 require("mason-nvim-dap").setup({
   ensure_installed = { "delve" },
   handlers = {},
 })
--- require("mason-nvim-dap").setup_handlers({})

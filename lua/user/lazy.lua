@@ -1,7 +1,7 @@
 require("lazy").setup({
   {
     "VonHeikemen/lsp-zero.nvim",
-    branch = "v2.x",
+    branch = "v4.x",
     dependencies = {
       -- LSP Support
       { "neovim/nvim-lspconfig" },             -- Required
@@ -19,8 +19,6 @@ require("lazy").setup({
       -- Snippets
       { "L3MON4D3/LuaSnip" },             -- Required
       { "rafamadriz/friendly-snippets" }, -- Optional
-      { "jose-elias-alvarez/null-ls.nvim" },
-      { "jay-babu/mason-null-ls.nvim" },
     },
     config = function() require("user.configs.lsp_zero") end,
   },
@@ -166,5 +164,8 @@ require("lazy").setup({
         },
       })
     end,
+  },
+  {
+    "sbdchd/neoformat",
   },
 })
